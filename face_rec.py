@@ -28,7 +28,7 @@ def retrive_data(name):
     retrive_series.index = index
     retrive_df = retrive_series.to_frame().reset_index()
     retrive_df.columns = ['name_role','Features']
-    retrive_df[['Name','Role']]=retrive_df['name_role'].apply(lambda x: x.split('-')).apply(pd.Series)
+    retrive_df[['Name','Role']]=retrive_df['name_role'].apply(lambda x: x.split('@')).apply(pd.Series)
     return retrive_df[['Name','Role','Features']]
 
 ## configure face analysis
@@ -79,10 +79,10 @@ class RealTimePredic:
         encoded_data = []
         for name,role,ctime in zip(name_list,role_list,ctime_list):
             if name != 'unknown':
-                concat_string = f"{name}-{role}-{ctime}"
+                concat_string = f"{name}@{role}@{ctime}"
                 encoded_data.append(concat_string)
         if len(encoded_data) > 0:
-            r.lpush('attendance:logs',*encoded_data)
+            r.lpush('attendance:logss',*encoded_data)
         self.reset_dict()
     def face_prediction(self,test_image1,dataframe,feature_column,name_role=['Name','Role'],thresh=0.4):
         
@@ -136,7 +136,7 @@ class RegistrationForm:
     def save_data_in_redis_db(self,name,role):
         if name is not None:
             if name.strip() != '':
-                key = f'{name}-{role}'
+                key = f'{name}@{role}'
             else:
                 return 'name_false'
         else:

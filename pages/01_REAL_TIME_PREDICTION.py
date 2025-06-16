@@ -1,7 +1,7 @@
 from Home import st
 
 
-st.set_page_config(page_title='Prediction')
+#st.set_page_config(page_title='Prediction')
 
 from Home import face_rec
 

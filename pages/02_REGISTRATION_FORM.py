@@ -6,7 +6,7 @@ from streamlit_webrtc import webrtc_streamer
 import av
 
 
-st.set_page_config(page_title='Registration',layout='centered')
+#st.set_page_config(page_title='Registration',layout='centered')
 st.subheader('Registration Form')
 
 ## initialise the registration form
